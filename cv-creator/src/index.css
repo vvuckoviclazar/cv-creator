@@ -1,0 +1,119 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  font-size: 6.25%;
+}
+
+body {
+  background-color: gainsboro;
+  font-family: sans-serif;
+}
+
+header {
+  text-align: center;
+  background-color: rgb(51, 51, 51);
+  color: gainsboro;
+  font-size: 45rem;
+  font-weight: bold;
+  padding-top: 20rem;
+  padding-bottom: 20rem;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 750rem;
+  border-radius: 10rem;
+  background-color: rgb(246, 243, 243);
+  margin: 50rem auto;
+  box-shadow: 0 8rem 16rem rgba(0, 0, 0, 0.392);
+  padding: 45rem 25rem 10rem 25rem;
+}
+
+h1 {
+  width: 100%;
+  text-align: left;
+  font-size: 23rem;
+  color: rgb(56, 56, 56);
+  margin-bottom: 15rem;
+}
+
+.information-div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 30rem;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 15rem;
+  padding: 7rem 0rem 7rem 7rem;
+  border-radius: 5rem;
+  border: 1rem solid gainsboro;
+  font-size: 20rem;
+  font-weight: 300;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0rem;
+  margin-bottom: 10rem;
+}
+
+.cv-buttons {
+  width: 100%;
+  font-size: 20rem;
+  font-weight: bold;
+  color: rgb(238, 238, 238);
+  background-color: rgb(54, 54, 54);
+  border: none;
+  border-radius: 7rem;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+  transition: background-color 0.3s ease;
+}
+
+.cv-buttons:hover {
+  background-color: rgb(36, 36, 36);
+  cursor: pointer;
+}
+
+.add {
+  margin-bottom: 30rem;
+}
+
+.green {
+  margin-bottom: 10rem;
+  background-color: rgb(31, 186, 0);
+}
+
+.red {
+  background-color: rgb(233, 0, 0);
+}
+
+.green:hover {
+  cursor: pointer;
+  background-color: rgb(0, 146, 0);
+}
+
+.red:hover {
+  cursor: pointer;
+  background-color: rgb(196, 0, 0);
+}
+
+footer {
+  width: 100%;
+  background-color: rgb(51, 51, 51);
+  color: rgb(234, 234, 234);
+  text-align: center;
+  font-size: 15rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
