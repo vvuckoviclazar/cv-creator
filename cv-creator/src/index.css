@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background-color: gainsboro;
+  background-color: #d2d4d7;
   font-family: sans-serif;
 }
 
@@ -30,7 +30,7 @@ header {
   flex-direction: column;
   width: 750rem;
   border-radius: 10rem;
-  background-color: rgb(246, 243, 243);
+  background-color: #eceef1;
   margin: 50rem auto;
   box-shadow: 0 8rem 16rem rgba(0, 0, 0, 0.392);
   padding: 45rem 25rem 10rem 25rem;
@@ -64,6 +64,9 @@ input {
 ul {
   list-style-type: none;
   padding-left: 0rem;
+}
+
+li {
   margin-bottom: 10rem;
 }
 
