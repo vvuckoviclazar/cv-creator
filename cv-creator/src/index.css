@@ -120,3 +120,96 @@ footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 5rem;
+  background-color: rgba(0, 0, 0, 0.66);
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.66);
+  width: 100%;
+  height: 100%;
+  padding-left: 300rem;
+  padding-right: 300rem;
+}
+
+.personalInfo-h1 {
+  font-size: 35rem;
+  color: white;
+  margin-bottom: 0rem;
+}
+
+.personalInfo-p {
+  font-size: 20rem;
+  color: white;
+  text-align: start;
+  font-weight: 500;
+}
+
+.personalInfo-header {
+  background-color: #4caf50;
+  padding-top: 15rem;
+  padding-left: 15rem;
+  padding-bottom: 70rem;
+}
+
+.infoContainer {
+  background-color: white;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.right {
+  background-color: #edeff2;
+}
+
+.details-h1 {
+  color: #4caf50;
+  border-bottom: 1rem solid rgb(183, 183, 183);
+  margin-bottom: 5rem;
+}
+
+.details-h2 {
+  font-size: 20rem;
+  margin-bottom: 5rem;
+  color: rgb(67, 67, 67);
+}
+
+.details-p {
+  font-size: 16rem;
+  margin-bottom: 10rem;
+  color: rgb(98, 98, 98);
+}
+
+.details-div {
+  padding-left: 7rem;
+  padding-right: 7rem;
+}
+
+.left {
+  padding: 15rem 55rem 0rem 15rem;
+}
+
+.left-h1 {
+  color: #4caf50;
+  border-bottom: 1rem solid rgb(183, 183, 183);
+  margin-bottom: 5rem;
+  font-size: 25rem;
+  margin-bottom: 10rem;
+}
+
+.left-p-italic {
+  font-style: italic;
+  font-size: 18rem;
+  color: rgb(105, 105, 105);
+}
