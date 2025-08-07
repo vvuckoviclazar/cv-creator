@@ -5,7 +5,7 @@ import Btn from "./btn.jsx";
 function App() {
   const [cv, setCv] = useState({
     personalInfo: {
-      firstName: "",
+      firstName: { name: "", placeholder: "", value: "" },
       lastName: "",
       title: "",
       photo: "",
@@ -273,6 +273,39 @@ function App() {
                 <div className="left">
                   <h3 className="left-h1">Description</h3>
                   <p className="left-p-italic">{cv.personalInfo.description}</p>
+                  <ul className="preview-list">
+                    <h1 className="details-h1">Education</h1>
+                    {cv.education.map((edu, index) => (
+                      <li className="info-li" key={index}>
+                        <h2 className="details-h2">
+                          {edu.from} - {edu.to}
+                        </h2>
+                        <div className="right-edu">
+                          <h2 className="details-h2">{edu.degree}</h2>
+                          <p className="details-p">{edu.subject}</p>
+                          <p className="details-p">
+                            {edu.universityName}, {edu.city}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <ul className="preview-list">
+                    <h1 className="details-h1">Experience</h1>
+                    {cv.experience.map((exp, index) => (
+                      <li className="info-li" key={index}>
+                        <h2 className="details-h2">
+                          {exp.from} - {exp.to}
+                        </h2>
+                        <div className="right-edu">
+                          <h2 className="details-h2">{exp.position}</h2>
+                          <p className="details-p">
+                            {exp.company}, {exp.city}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 <div className="right">
                   <div className="details-div">
