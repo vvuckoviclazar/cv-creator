@@ -5,32 +5,40 @@ import Btn from "./btn.jsx";
 function App() {
   const [cv, setCv] = useState({
     personalInfo: {
-      firstName: { name: "", placeholder: "", value: "" },
-      lastName: "",
-      title: "",
-      photo: "",
-      address: "",
-      phone: "",
-      email: "",
-      description: "",
+      firstName: { name: "firstName", placeholder: "First Name", value: "" },
+      lastName: { name: "lastName", placeholder: "Last Name", value: "" },
+      title: { name: "title", placeholder: "Title", value: "" },
+      photo: { name: "photo", placeholder: "Photo URL", value: "" },
+      address: { name: "address", placeholder: "Address", value: "" },
+      phone: { name: "phone", placeholder: "Phone number", value: "" },
+      email: { name: "email", placeholder: "Email", value: "" },
+      description: {
+        name: "description",
+        placeholder: "Description",
+        value: "",
+      },
     },
     education: [
       {
-        universityName: "",
-        city: "",
-        degree: "",
-        subject: "",
-        from: "",
-        to: "",
+        universityName: {
+          name: "universityName",
+          placeholder: "University name",
+          value: "",
+        },
+        city: { name: "city", placeholder: "City", value: "" },
+        degree: { name: "degree", placeholder: "Degree", value: "" },
+        subject: { name: "subject", placeholder: "Subject", value: "" },
+        from: { name: "from", placeholder: "From (dd/mm/yy)", value: "" },
+        to: { name: "to", placeholder: "To (dd/mm/yy)", value: "" },
       },
     ],
     experience: [
       {
-        position: "",
-        company: "",
-        city: "",
-        from: "",
-        to: "",
+        position: { name: "position", placeholder: "Position", value: "" },
+        company: { name: "company", placeholder: "Company", value: "" },
+        city: { name: "city", placeholder: "City", value: "" },
+        from: { name: "from", placeholder: "From (dd/mm/yy)", value: "" },
+        to: { name: "to", placeholder: "To (dd/mm/yy)", value: "" },
       },
     ],
   });
@@ -43,12 +51,16 @@ function App() {
       education: [
         ...prev.education,
         {
-          universityName: "",
-          city: "",
-          degree: "",
-          subject: "",
-          from: "",
-          to: "",
+          universityName: {
+            name: "universityName",
+            placeholder: "University name",
+            value: "",
+          },
+          city: { name: "city", placeholder: "City", value: "" },
+          degree: { name: "degree", placeholder: "Degree", value: "" },
+          subject: { name: "subject", placeholder: "Subject", value: "" },
+          from: { name: "from", placeholder: "From (dd/mm/yy)", value: "" },
+          to: { name: "to", placeholder: "To (dd/mm/yy)", value: "" },
         },
       ],
     }));
@@ -60,11 +72,11 @@ function App() {
       experience: [
         ...prev.experience,
         {
-          position: "",
-          company: "",
-          city: "",
-          from: "",
-          to: "",
+          position: { name: "position", placeholder: "Position", value: "" },
+          company: { name: "company", placeholder: "Company", value: "" },
+          city: { name: "city", placeholder: "City", value: "" },
+          from: { name: "from", placeholder: "From (dd/mm/yy)", value: "" },
+          to: { name: "to", placeholder: "To (dd/mm/yy)", value: "" },
         },
       ],
     }));
@@ -74,27 +86,20 @@ function App() {
     const { name, value } = e.target;
     setCv((prev) => ({
       ...prev,
-      personalInfo: { ...prev.personalInfo, [name]: value },
+      personalInfo: {
+        ...prev.personalInfo,
+        [name]: { ...prev.personalInfo[name], value },
+      },
     }));
   };
 
-  const handleEducationChange = (index, e) => {
+  const handleListChange = (section, index, e) => {
     const { name, value } = e.target;
-    const updatedEducation = [...cv.education];
-    updatedEducation[index][name] = value;
+    const updatedList = [...cv[section]];
+    updatedList[index][name] = { ...updatedList[index][name], value };
     setCv((prev) => ({
       ...prev,
-      education: updatedEducation,
-    }));
-  };
-
-  const handleExperienceChange = (index, e) => {
-    const { name, value } = e.target;
-    const updatedExperience = [...cv.experience];
-    updatedExperience[index][name] = value;
-    setCv((prev) => ({
-      ...prev,
-      experience: updatedExperience,
+      [section]: updatedList,
     }));
   };
 
@@ -102,151 +107,59 @@ function App() {
     <>
       <header>CV CREATOR</header>
       <div className="container">
-        <h1>Personal information</h1>
+        <h1>Personal Information</h1>
         <div className="information-div">
-          <input
-            name="firstName"
-            type="text"
-            placeholder="First Name"
-            value={cv.personalInfo.firstName}
-            onChange={handlePersonalChange}
-          />
-          <input
-            name="lastName"
-            type="text"
-            placeholder="Last Name"
-            value={cv.personalInfo.lastName}
-            onChange={handlePersonalChange}
-          />
-          <input
-            name="title"
-            type="text"
-            placeholder="Title"
-            value={cv.personalInfo.title}
-            onChange={handlePersonalChange}
-          />
-          <input
-            name="photo"
-            type="text"
-            placeholder="Photo"
-            value={cv.personalInfo.photo}
-            onChange={handlePersonalChange}
-          />
-          <input
-            name="address"
-            type="text"
-            placeholder="Address"
-            value={cv.personalInfo.address}
-            onChange={handlePersonalChange}
-          />
-          <input
-            name="phone"
-            type="text"
-            placeholder="Phone number"
-            value={cv.personalInfo.phone}
-            onChange={handlePersonalChange}
-          />
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={cv.personalInfo.email}
-            onChange={handlePersonalChange}
-          />
-          <input
-            name="description"
-            type="text"
-            placeholder="Description"
-            value={cv.personalInfo.description}
-            onChange={handlePersonalChange}
-          />
+          {Object.values(cv.personalInfo).map((field) => (
+            <input
+              key={field.name}
+              name={field.name}
+              type="text"
+              placeholder={field.placeholder}
+              value={field.value}
+              onChange={handlePersonalChange}
+            />
+          ))}
         </div>
+
         <h1>Education</h1>
         <ul className="education-list">
           {cv.education.map((edu, index) => (
             <li key={index}>
-              <input
-                name="universityName"
-                placeholder="University name"
-                value={edu.universityName}
-                onChange={(e) => handleEducationChange(index, e)}
-              />
-              <input
-                name="city"
-                placeholder="City"
-                value={edu.city}
-                onChange={(e) => handleEducationChange(index, e)}
-              />
-              <input
-                name="degree"
-                placeholder="Degree"
-                value={edu.degree}
-                onChange={(e) => handleEducationChange(index, e)}
-              />
-              <input
-                name="subject"
-                placeholder="Subject"
-                value={edu.subject}
-                onChange={(e) => handleEducationChange(index, e)}
-              />
-              <input
-                name="from"
-                placeholder="From (dd/mm/yy)"
-                value={edu.from}
-                onChange={(e) => handleEducationChange(index, e)}
-              />
-              <input
-                name="to"
-                placeholder="To (dd/mm/yy)"
-                value={edu.to}
-                onChange={(e) => handleEducationChange(index, e)}
-              />
+              {Object.values(edu).map((field) => (
+                <input
+                  key={field.name}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={field.value}
+                  onChange={(e) => handleListChange("education", index, e)}
+                />
+              ))}
               <Btn onClick={() => console.log("Delete...")}>Delete</Btn>
             </li>
           ))}
         </ul>
-        <Btn onClick={() => addEducation()} variation="add">
+        <Btn onClick={addEducation} variation="add">
           Add Education
         </Btn>
+
         <h1>Experience</h1>
         <ul className="experience-list">
           {cv.experience.map((exp, index) => (
             <li key={index}>
-              <input
-                name="position"
-                placeholder="Position"
-                value={exp.position}
-                onChange={(e) => handleExperienceChange(index, e)}
-              />
-              <input
-                name="company"
-                placeholder="Company"
-                value={exp.company}
-                onChange={(e) => handleExperienceChange(index, e)}
-              />
-              <input
-                name="city"
-                placeholder="City"
-                value={exp.city}
-                onChange={(e) => handleExperienceChange(index, e)}
-              />
-              <input
-                name="from"
-                placeholder="From (dd/mm/yy)"
-                value={exp.from}
-                onChange={(e) => handleExperienceChange(index, e)}
-              />
-              <input
-                name="to"
-                placeholder="To (dd/mm/yy)"
-                value={exp.to}
-                onChange={(e) => handleExperienceChange(index, e)}
-              />
+              {Object.values(exp).map((field) => (
+                <input
+                  key={field.name}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={field.value}
+                  onChange={(e) => handleListChange("experience", index, e)}
+                />
+              ))}
               <Btn onClick={() => console.log("Delete...")}>Delete</Btn>
             </li>
           ))}
         </ul>
-        <Btn onClick={() => addExperience()} variation="add">
+        <Btn onClick={addExperience} variation="add">
           Add Experience
         </Btn>
 
@@ -257,7 +170,8 @@ function App() {
           Reset
         </Btn>
       </div>
-      <footer>Coyright © 2025 Lazar Vuckovic</footer>
+
+      <footer>Copyright © 2025 Lazar Vuckovic</footer>
 
       {previewVisible && (
         <div className="modal">
@@ -265,26 +179,29 @@ function App() {
             <div className="modal-content">
               <header className="personalInfo-header">
                 <h1 className="personalInfo-h1">
-                  {cv.personalInfo.firstName} {cv.personalInfo.lastName}
+                  {cv.personalInfo.firstName.value}{" "}
+                  {cv.personalInfo.lastName.value}
                 </h1>
-                <p className="personalInfo-p">{cv.personalInfo.title}</p>
+                <p className="personalInfo-p">{cv.personalInfo.title.value}</p>
               </header>
               <div className="infoContainer">
                 <div className="left">
                   <h3 className="left-h1">Description</h3>
-                  <p className="left-p-italic">{cv.personalInfo.description}</p>
+                  <p className="left-p-italic">
+                    {cv.personalInfo.description.value}
+                  </p>
                   <ul className="preview-list">
                     <h1 className="details-h1">Education</h1>
                     {cv.education.map((edu, index) => (
                       <li className="info-li" key={index}>
                         <h2 className="details-h2">
-                          {edu.from} - {edu.to}
+                          {edu.from.value} - {edu.to.value}
                         </h2>
                         <div className="right-edu">
-                          <h2 className="details-h2">{edu.degree}</h2>
-                          <p className="details-p">{edu.subject}</p>
+                          <h2 className="details-h2">{edu.degree.value}</h2>
+                          <p className="details-p">{edu.subject.value}</p>
                           <p className="details-p">
-                            {edu.universityName}, {edu.city}
+                            {edu.universityName.value}, {edu.city.value}
                           </p>
                         </div>
                       </li>
@@ -295,12 +212,12 @@ function App() {
                     {cv.experience.map((exp, index) => (
                       <li className="info-li" key={index}>
                         <h2 className="details-h2">
-                          {exp.from} - {exp.to}
+                          {exp.from.value} - {exp.to.value}
                         </h2>
                         <div className="right-edu">
-                          <h2 className="details-h2">{exp.position}</h2>
+                          <h2 className="details-h2">{exp.position.value}</h2>
                           <p className="details-p">
-                            {exp.company}, {exp.city}
+                            {exp.company.value}, {exp.city.value}
                           </p>
                         </div>
                       </li>
@@ -310,12 +227,12 @@ function App() {
                 <div className="right">
                   <div className="details-div">
                     <h1 className="details-h1">Personal Details</h1>
-                    <h2 className="details-h2">Adress</h2>
-                    <p className="details-p">{cv.personalInfo.address}</p>
+                    <h2 className="details-h2">Address</h2>
+                    <p className="details-p">{cv.personalInfo.address.value}</p>
                     <h2 className="details-h2">Phone number</h2>
-                    <p className="details-p">{cv.personalInfo.phone}</p>
+                    <p className="details-p">{cv.personalInfo.phone.value}</p>
                     <h2 className="details-h2">Email</h2>
-                    <p className="details-p">{cv.personalInfo.email}</p>
+                    <p className="details-p">{cv.personalInfo.email.value}</p>
                   </div>
                 </div>
               </div>
@@ -328,3 +245,8 @@ function App() {
 }
 
 export default App;
+
+// data driven ui development
+// how to loop over an object
+// i want to apply data driven ui development principle
+// i need to loop over an object to display my state
