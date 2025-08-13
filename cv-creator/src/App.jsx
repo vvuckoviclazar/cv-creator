@@ -3,6 +3,8 @@ import "./index.css";
 import Btn from "./btn.jsx";
 
 function App() {
+  const [uploadedPhoto, setUploadedPhoto] = useState("");
+
   const [cv, setCv] = useState({
     personalInfo: {
       firstName: { name: "firstName", placeholder: "First Name", value: "" },
@@ -120,6 +122,19 @@ function App() {
             />
           ))}
         </div>
+        <label className="photo">
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                const imageUrl = URL.createObjectURL(file);
+                setUploadedPhoto(imageUrl);
+              }
+            }}
+          />
+        </label>
 
         <h1>Education</h1>
         <ul className="education-list">
@@ -141,7 +156,6 @@ function App() {
         <Btn onClick={addEducation} variation="add">
           Add Education
         </Btn>
-
         <h1>Experience</h1>
         <ul className="experience-list">
           {cv.experience.map((exp, index) => (
@@ -162,7 +176,6 @@ function App() {
         <Btn onClick={addExperience} variation="add">
           Add Experience
         </Btn>
-
         <Btn onClick={() => setPreviewVisible(true)} variation="green">
           Preview
         </Btn>
@@ -226,6 +239,11 @@ function App() {
                 </div>
                 <div className="right">
                   <div className="details-div">
+                    <img
+                      className="img"
+                      src={uploadedPhoto || "/download.jpg"}
+                      alt="Profile"
+                    />
                     <h1 className="details-h1">Personal Details</h1>
                     <h2 className="details-h2">Address</h2>
                     <p className="details-p">{cv.personalInfo.address.value}</p>

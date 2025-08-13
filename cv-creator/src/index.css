@@ -166,7 +166,8 @@ footer {
 .infoContainer {
   background-color: white;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2.1fr 0.9fr;
+  padding-bottom: 100%;
 }
 
 .right {
@@ -194,6 +195,7 @@ footer {
 .details-div {
   padding-left: 7rem;
   padding-right: 7rem;
+  padding-bottom: 100%;
 }
 
 .left {
@@ -218,4 +220,8 @@ footer {
 .info-li {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.img {
+  width: 100%;
 }
