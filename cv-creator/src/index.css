@@ -163,6 +163,10 @@ footer {
   padding-bottom: 70rem;
 }
 
+.modal-content {
+  min-height: 800rem;
+}
+
 .infoContainer {
   background-color: white;
   display: grid;

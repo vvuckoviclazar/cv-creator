@@ -1,86 +1,24 @@
 import { useState } from "react";
 import "./index.css";
 import Btn from "./btn.jsx";
+import { INITIAL_CV, EDUCATION_TEMPLATE, EXPERIENCE_TEMPLATE } from "./cv";
 
 function App() {
   const [uploadedPhoto, setUploadedPhoto] = useState("");
-
-  const [cv, setCv] = useState({
-    personalInfo: {
-      firstName: { name: "firstName", placeholder: "First Name", value: "" },
-      lastName: { name: "lastName", placeholder: "Last Name", value: "" },
-      title: { name: "title", placeholder: "Title", value: "" },
-      photo: { name: "photo", placeholder: "Photo URL", value: "" },
-      address: { name: "address", placeholder: "Address", value: "" },
-      phone: { name: "phone", placeholder: "Phone number", value: "" },
-      email: { name: "email", placeholder: "Email", value: "" },
-      description: {
-        name: "description",
-        placeholder: "Description",
-        value: "",
-      },
-    },
-    education: [
-      {
-        universityName: {
-          name: "universityName",
-          placeholder: "University name",
-          value: "",
-        },
-        city: { name: "city", placeholder: "City", value: "" },
-        degree: { name: "degree", placeholder: "Degree", value: "" },
-        subject: { name: "subject", placeholder: "Subject", value: "" },
-        from: { name: "from", placeholder: "From (dd/mm/yy)", value: "" },
-        to: { name: "to", placeholder: "To (dd/mm/yy)", value: "" },
-      },
-    ],
-    experience: [
-      {
-        position: { name: "position", placeholder: "Position", value: "" },
-        company: { name: "company", placeholder: "Company", value: "" },
-        city: { name: "city", placeholder: "City", value: "" },
-        from: { name: "from", placeholder: "From (dd/mm/yy)", value: "" },
-        to: { name: "to", placeholder: "To (dd/mm/yy)", value: "" },
-      },
-    ],
-  });
-
+  const [cv, setCv] = useState(() => structuredClone(INITIAL_CV));
   const [previewVisible, setPreviewVisible] = useState(false);
 
   const addEducation = () => {
     setCv((prev) => ({
       ...prev,
-      education: [
-        ...prev.education,
-        {
-          universityName: {
-            name: "universityName",
-            placeholder: "University name",
-            value: "",
-          },
-          city: { name: "city", placeholder: "City", value: "" },
-          degree: { name: "degree", placeholder: "Degree", value: "" },
-          subject: { name: "subject", placeholder: "Subject", value: "" },
-          from: { name: "from", placeholder: "From (dd/mm/yy)", value: "" },
-          to: { name: "to", placeholder: "To (dd/mm/yy)", value: "" },
-        },
-      ],
+      education: [...prev.education, structuredClone(EDUCATION_TEMPLATE)],
     }));
   };
 
   const addExperience = () => {
     setCv((prev) => ({
       ...prev,
-      experience: [
-        ...prev.experience,
-        {
-          position: { name: "position", placeholder: "Position", value: "" },
-          company: { name: "company", placeholder: "Company", value: "" },
-          city: { name: "city", placeholder: "City", value: "" },
-          from: { name: "from", placeholder: "From (dd/mm/yy)", value: "" },
-          to: { name: "to", placeholder: "To (dd/mm/yy)", value: "" },
-        },
-      ],
+      experience: [...prev.experience, structuredClone(EXPERIENCE_TEMPLATE)],
     }));
   };
 
@@ -102,6 +40,13 @@ function App() {
     setCv((prev) => ({
       ...prev,
       [section]: updatedList,
+    }));
+  };
+
+  const deleteListItem = (section, index) => {
+    setCv((prev) => ({
+      ...prev,
+      [section]: prev[section].filter((_, i) => i !== index),
     }));
   };
 
@@ -149,7 +94,9 @@ function App() {
                   onChange={(e) => handleListChange("education", index, e)}
                 />
               ))}
-              <Btn onClick={() => console.log("Delete...")}>Delete</Btn>
+              <Btn onClick={() => deleteListItem("education", index)}>
+                Delete
+              </Btn>
             </li>
           ))}
         </ul>
@@ -169,7 +116,9 @@ function App() {
                   onChange={(e) => handleListChange("experience", index, e)}
                 />
               ))}
-              <Btn onClick={() => console.log("Delete...")}>Delete</Btn>
+              <Btn onClick={() => deleteListItem("experience", index)}>
+                Delete
+              </Btn>
             </li>
           ))}
         </ul>
