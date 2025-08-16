@@ -3,7 +3,6 @@ export const INITIAL_CV = {
     firstName: { name: "firstName", placeholder: "First Name", value: "" },
     lastName: { name: "lastName", placeholder: "Last Name", value: "" },
     title: { name: "title", placeholder: "Title", value: "" },
-    photo: { name: "photo", placeholder: "Photo URL", value: "" },
     address: { name: "address", placeholder: "Address", value: "" },
     phone: { name: "phone", placeholder: "Phone number", value: "" },
     email: { name: "email", placeholder: "Email", value: "" },

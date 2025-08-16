@@ -229,3 +229,28 @@ footer {
 .img {
   width: 100%;
 }
+
+.photo {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15rem;
+  padding: 7rem 0rem 7rem 7rem;
+  border-radius: 5rem;
+  border: none;
+  font-size: 20rem;
+  font-weight: 300;
+  background-color: white;
+  color: gray;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.photo-input {
+  display: none;
+  width: 100%;
+}
+
+.field {
+  width: 100%;
+}

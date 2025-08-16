@@ -57,29 +57,35 @@ function App() {
         <h1>Personal Information</h1>
         <div className="information-div">
           {Object.values(cv.personalInfo).map((field) => (
-            <input
-              key={field.name}
-              name={field.name}
-              type="text"
-              placeholder={field.placeholder}
-              value={field.value}
-              onChange={handlePersonalChange}
-            />
+            <div key={field.name} className="field">
+              <input
+                name={field.name}
+                type="text"
+                placeholder={field.placeholder}
+                value={field.value}
+                onChange={handlePersonalChange}
+              />
+
+              {field.name === "title" && (
+                <label className="photo">
+                  Photo
+                  <input
+                    className="photo-input"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const imageUrl = URL.createObjectURL(file);
+                        setUploadedPhoto(imageUrl);
+                      }
+                    }}
+                  />
+                </label>
+              )}
+            </div>
           ))}
         </div>
-        <label className="photo">
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) {
-                const imageUrl = URL.createObjectURL(file);
-                setUploadedPhoto(imageUrl);
-              }
-            }}
-          />
-        </label>
 
         <h1>Education</h1>
         <ul className="education-list">
