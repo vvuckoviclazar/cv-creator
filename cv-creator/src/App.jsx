@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./index.css";
 import Btn from "./btn.jsx";
 import { INITIAL_CV, EDUCATION_TEMPLATE, EXPERIENCE_TEMPLATE } from "./cv";
 
 function App() {
-  const [uploadedPhoto, setUploadedPhoto] = useState("");
   const [cv, setCv] = useState(() => structuredClone(INITIAL_CV));
   const [previewVisible, setPreviewVisible] = useState(false);
+
+  useEffect(() => {
+    if (previewVisible) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+      document.body.classList.add("preview-open");
+    } else {
+      document.body.classList.remove("preview-open");
+    }
+    return () => document.body.classList.remove("preview-open");
+  }, [previewVisible]);
 
   const addEducation = () => {
     setCv((prev) => ({
@@ -23,12 +32,19 @@ function App() {
   };
 
   const handlePersonalChange = (e) => {
-    const { name, value } = e.target;
+    const { name, type, value, files } = e.target;
+
+    let newValue = value;
+
+    if (type === "file") {
+      newValue = URL.createObjectURL(files[0]);
+    }
+
     setCv((prev) => ({
       ...prev,
       personalInfo: {
         ...prev.personalInfo,
-        [name]: { ...prev.personalInfo[name], value },
+        [name]: { ...prev.personalInfo[name], value: newValue },
       },
     }));
   };
@@ -56,35 +72,31 @@ function App() {
       <div className="container">
         <h1>Personal Information</h1>
         <div className="information-div">
-          {Object.values(cv.personalInfo).map((field) => (
-            <div key={field.name} className="field">
-              <input
-                name={field.name}
-                type="text"
-                placeholder={field.placeholder}
-                value={field.value}
-                onChange={handlePersonalChange}
-              />
+          {Object.values(cv.personalInfo).map((field) => {
+            const isFile = field.type === "file";
+            const inputId = `field-${field.name}`;
 
-              {field.name === "title" && (
-                <label className="photo">
-                  Photo
-                  <input
-                    className="photo-input"
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) {
-                        const imageUrl = URL.createObjectURL(file);
-                        setUploadedPhoto(imageUrl);
-                      }
-                    }}
-                  />
-                </label>
-              )}
-            </div>
-          ))}
+            return (
+              <div key={field.name} className="field">
+                {isFile && (
+                  <label htmlFor={inputId} className="field-photo">
+                    Photo
+                  </label>
+                )}
+
+                <input
+                  id={inputId}
+                  className={isFile ? "photo-input" : ""}
+                  name={field.name}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  value={isFile ? undefined : field.value}
+                  onChange={handlePersonalChange}
+                  {...(isFile ? { accept: "image/*" } : {})}
+                />
+              </div>
+            );
+          })}
         </div>
 
         <h1>Education</h1>
@@ -131,10 +143,22 @@ function App() {
         <Btn onClick={addExperience} variation="add">
           Add Experience
         </Btn>
-        <Btn onClick={() => setPreviewVisible(true)} variation="green">
+        <Btn
+          onClick={() => {
+            setPreviewVisible(true);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          variation="green"
+        >
           Preview
         </Btn>
-        <Btn onClick={() => console.log("Reset...")} variation="red">
+        <Btn
+          onClick={() => {
+            setCv(structuredClone(INITIAL_CV));
+            photoUrlRef.current = null;
+          }}
+          variation="red"
+        >
           Reset
         </Btn>
       </div>
@@ -196,7 +220,7 @@ function App() {
                   <div className="details-div">
                     <img
                       className="img"
-                      src={uploadedPhoto || "/download.jpg"}
+                      src={cv.personalInfo.photo.value || "/download.jpg"}
                       alt="Profile"
                     />
                     <h1 className="details-h1">Personal Details</h1>
@@ -218,8 +242,3 @@ function App() {
 }
 
 export default App;
-
-// data driven ui development
-// how to loop over an object
-// i want to apply data driven ui development principle
-// i need to loop over an object to display my state

@@ -1,12 +1,38 @@
 export const INITIAL_CV = {
   personalInfo: {
-    firstName: { name: "firstName", placeholder: "First Name", value: "" },
-    lastName: { name: "lastName", placeholder: "Last Name", value: "" },
-    title: { name: "title", placeholder: "Title", value: "" },
-    address: { name: "address", placeholder: "Address", value: "" },
-    phone: { name: "phone", placeholder: "Phone number", value: "" },
-    email: { name: "email", placeholder: "Email", value: "" },
-    description: { name: "description", placeholder: "Description", value: "" },
+    firstName: {
+      name: "firstName",
+      placeholder: "First Name",
+      value: "",
+      type: "text",
+    },
+    lastName: {
+      name: "lastName",
+      placeholder: "Last Name",
+      value: "",
+      type: "text",
+    },
+    title: { name: "title", placeholder: "Title", value: "", type: "text" },
+    photo: { name: "photo", placeholder: "Add Photo", value: "", type: "file" },
+    address: {
+      name: "address",
+      placeholder: "Address",
+      value: "",
+      type: "text",
+    },
+    phone: {
+      name: "phone",
+      placeholder: "Phone number",
+      value: "",
+      type: "text",
+    },
+    email: { name: "email", placeholder: "Email", value: "", type: "text" },
+    description: {
+      name: "description",
+      placeholder: "Description",
+      value: "",
+      type: "text",
+    },
   },
   education: [
     {
@@ -14,6 +40,7 @@ export const INITIAL_CV = {
         name: "universityName",
         placeholder: "University name",
         value: "",
+        type: "text",
       },
       city: { name: "city", placeholder: "City", value: "" },
       degree: { name: "degree", placeholder: "Degree", value: "" },
